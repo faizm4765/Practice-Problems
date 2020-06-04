@@ -1,5 +1,5 @@
 // This code gives next greater element for each element in an sorted array
-
+// For this approach to work , given array should be sorted as we are using binary search
 
 
 #include<bits/stdc++.h>
