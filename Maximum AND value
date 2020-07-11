@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int setBits(int a[],int n,int possibleAnswer){
+    int c = 0;
+    for(int i = 0;i < n;i++){
+        if((a[i] & possibleAnswer) == possibleAnswer)       // if 2 elements give us the possible answer (i.e c >= 2)
+            c++;                                            // we are good
+    }
+    return c;
+}
+
+
+int main(){
+
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int a[n],i;
+        for(i = 0;i < n;i++){
+            cin>>a[i];
+        }
+        int res = 0;
+        for(i = 31; i >= 0;i--){
+            int count = setBits(a,n,res | (1 << i));
+            if(count >= 2)
+                res = (res | (1 << i));   // we will update our answer to possibleAnswer
+        }
+        cout<<res;
+        cout<<"\n";
+    }
+
+    return 0;
+} 
