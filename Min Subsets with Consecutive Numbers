@@ -1,0 +1,41 @@
+Given an array of distinct positive numbers, the task is to calculate the minimum number 
+of subsets (or subsequences) from the array such that each subset contains consecutive numbers.
+ 
+Example 1:
+
+Input:
+N = 10
+Arr[] = {100, 56, 5, 6, 102, 58, 101, 57, 7, 103} 
+Output:
+3
+Explanation:
+{5, 6, 7}, { 56, 57, 58}, {100, 101, 102, 103} are
+3 subset in which numbers are consecutive.
+ 
+
+Example 2:
+
+Input:
+N = 3
+Arr[] = {10, 100, 105}
+Output:
+3
+Explanation:
+{10}, {100} and {105} are 3 subset
+in which numbers are consecutive.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+int numofsubset(int arr[], int n)
+{
+    // Your code goes here
+    int cnt = 0;
+    sort(arr,arr+n);
+    for(int i=1;i<n;i++){
+        if(arr[i] - arr[i-1] != 1)
+            cnt++;
+    }
+    return cnt+1;
+}
