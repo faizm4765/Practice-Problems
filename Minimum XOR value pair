@@ -1,0 +1,32 @@
+Given an array of integers of size N find minimum xor of any 2 elements.
+
+
+Example 1:
+
+Input:
+N = 3
+arr[] = {9,5,3}
+Output: 6
+Explanation: 
+There are 3 pairs -
+9^5 = 12
+5^3 = 6
+9^3 = 10
+
+Therefore output is 6.
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+
+class Solution{   
+public:
+    int minxorpair(int N, int arr[]){    
+        //code here
+        int sum = INT_MAX;
+        sort(arr,arr+N);
+        for(int i=0;i+1<N;i++){
+            sum = min(sum,arr[i] ^ arr[i+1]);
+        }
+        return sum;
+    }
+};
