@@ -25,6 +25,7 @@ arr is sorted in ascending order.
 -104 <= arr[i], x <= 104
 
 -------------------------------------------------------------------------------------------------------------
+O(n^2)
 
 class Solution {
 public:
@@ -44,6 +45,46 @@ public:
             }
             if(k == 0)
                 break;
+        }
+        sort(res.begin(),res.end());
+        return res;
+    }
+};
+
+--------------------------------------------------------------------------------------------------
+O(nlogk)
+
+Priority queue used
+
+typedef pair<int, int> pd;
+class Solution {
+public:
+    struct myComp {
+    constexpr bool operator()(pair<int, int> const& a, pair<int, int> const& b)
+        const noexcept{
+            return a.second < b.second;
+        }
+    };
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+       priority_queue<pd, vector<pd>, myComp> pq;      // to order priority queue of pair by second elt of pair
+       vector<int> res;
+       int n = arr.size(); 
+       for(int i = 0;i < n;i++){
+           if(pq.size() < k){
+               pq.push({arr[i],abs(arr[i] - x)});
+           }
+           else{
+               if(pq.top().second > abs(arr[i] - x)){
+                    cout<<pq.top().first<<" "<<pq.top().second<<"\n";
+                   pq.pop();
+                   pq.push({arr[i],abs(arr[i] - x)});    
+               }
+           }
+       }
+        while(!pq.empty()){
+            // cout<<pq.top().first<<" "<<pq.top().second<<"\n";
+            res.push_back(pq.top().first);
+            pq.pop();
         }
         sort(res.begin(),res.end());
         return res;
