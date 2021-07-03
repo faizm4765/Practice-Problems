@@ -1,0 +1,17 @@
+https://practice.geeksforgeeks.org/problems/max-sum-in-the-configuration/1#
+---------------------------------------------------------------------------------------------
+int max_sum(int arr[],int n)
+{
+//Your code here
+   int i,s = 0,sum = 0;
+   for(i = 0;i < n;i++){
+       s += (arr[i] * i);
+       sum += arr[i];
+   }
+   int res = s;
+   for(i = 0;i < n - 1;i++){
+       s = s - sum + (n * arr[i]);
+       res = max(s,res);
+   }
+   return res;
+}
