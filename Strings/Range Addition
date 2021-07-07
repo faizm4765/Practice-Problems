@@ -1,0 +1,49 @@
+1. Assume you have an array of length 'n' initialized with all 0's and are given 'q' queries to update.
+2. Each query is represented as a triplet: [startIndex, endIndex, inc] which increments each element of subarray A[startIndex ... endIndex] (startIndex and endIndex inclusive)
+   with inc.
+3. Return the modified array after all 'q' queries were executed.
+
+Sample Input
+12
+4
+2 6 4
+0 5 3
+1 4 -2
+6 9 1
+
+Sample Output
+3 1 5 5 5 7 5 1 1 1 0 0 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+
+int main(){
+    
+    int n,q,s,e,inc;
+    cin>>n>>q;
+    
+    int arr[n] = {0};
+    
+    while(q--){
+        cin>>s>>e>>inc;
+        // v.pb({s,e,inc});
+        arr[s] += inc;
+        if((e + 1) < n)
+            arr[e + 1] -= inc;                           
+    }
+    int sum = 0;
+    for(int i = 0;i < n;i++){
+        sum += arr[i];
+        arr[i] = sum;
+    }
+    for(int i = 0;i < n;i++){
+        cout<<arr[i]<<" ";
+    }
+    
+    return 0;
+}
