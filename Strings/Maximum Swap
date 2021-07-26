@@ -1,0 +1,41 @@
+You are given an integer num. You can swap two digits at most once to get the maximum valued number.
+
+Return the maximum valued number you can get.
+
+
+Example 1:
+
+Input: num = 2736
+Output: 7236
+Explanation: Swap the number 2 and the number 7.
+Example 2:
+
+Input: num = 9973
+Output: 9973
+Explanation: No swap.
+
+------------------------------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    int maximumSwap(int num) {
+        string s = to_string(num);
+        int n = s.size(),in = 0,i,j;
+        int maxR[9] = {n - 1};
+        maxR[n - 1] = n - 1;
+        for(i = n - 2;i >= 0;i--){
+            if(s[i] > s[maxR[i + 1]])
+                maxR[i] = i;
+            else
+                maxR[i] = maxR[i + 1];
+        }
+        for(i = 0;i < n;i++){
+            if(s[i] < s[maxR[i]]){
+                swap(s[i],s[maxR[i]]);
+                break;
+            }
+        }
+        int ans = stoi(s);
+        return ans;
+    }
+};
