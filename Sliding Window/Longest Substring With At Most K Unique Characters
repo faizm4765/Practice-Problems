@@ -1,0 +1,50 @@
+1. You are given a string(str) and a number K.
+2. You have to find the length of longest substring of the given string that contains at most K unique characters.
+Input Format
+A string
+A number
+Output Format
+A number representing the length of longest substring with at most K unique characters.
+
+ex:
+
+input:
+aabcbcdbca
+2
+output: 4
+
+----------------------------------------------------------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+
+int go(string s,int k){
+    int n = s.size(),i = 0,j = 0;
+    if(k > n)   
+        return 0;
+    unordered_map<char,int> mp;
+    int ans = 0;
+    while(j < n){
+        mp[s[j]]++;
+        if(mp.size() <= k)
+            ans = max(ans,j - i + 1);
+        while(mp.size() > k){
+            mp[s[i]]--;
+            if(mp[s[i]] == 0)
+                mp.erase(s[i]);
+            i++;
+        }
+        j++;
+    }
+    return ans;
+}
+
+int main(){
+    
+    int k;
+    string s;
+    cin>>s>>k;
+    
+    cout<<go(s,k);
+    
+    return 0;
+}
